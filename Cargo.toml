@@ -3,7 +3,7 @@ name = "sonark"
 version = "0.0.10"
 edition = "2024"
 description = "SonarK - Echo the packet"
-license = "TBD"
+license = "MIT"
 exclude = ["/sonark/", "**/*.log"]
 
 [dependencies]
