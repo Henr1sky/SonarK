@@ -35,11 +35,37 @@ SonarK é uma CLI/TUI para investigar arquivos que você já tem: capturas PCAP/
 
 O catálogo tem **233 ações executáveis**. Dessas, **20** também consultam logs HTTP diretamente. O editor completo de comandos e etapas está disponível em **[2.2]**, **[3.7]** e **[4.6]**. Dentro de uma categoria, **i** mostra os IDs que ainda estão sem preset executável.
 
+## Dependências
+
+| Função | Ferramentas | Pacotes no Kali e Debian |
+| --- | --- | --- |
+| Compilar e instalar | Git, compilador e linker do sistema, Cargo e Rust com suporte à edição 2024 | `git`, `build-essential`, `cargo`, `rustc` |
+| Analisar PCAP/PCAPNG | `tshark` para os presets e `capinfos` para informações e hashes de captura | `tshark`, `wireshark-common` |
+| Converter logs em PCAPNG | `text2pcap` com suporte a PDUs exportadas (`-P`) | `wireshark-common` |
+| Analisar PDFs | `pdftotext`, `pdfinfo` e `pdfimages` | `poppler-utils` |
+| Executar etapas de saída | `sort`, `uniq`, `head`, `tail`, `cut`, `wc`, `grep` e `awk` | `coreutils`, `grep`, `mawk` |
+
+Para instalar o conjunto completo no Kali ou Debian:
+
+```bash
+sudo apt update
+sudo apt install git build-essential cargo rustc tshark wireshark-common poppler-utils coreutils grep mawk
+```
+
+Confira se as ferramentas estão no `PATH`:
+
+```bash
+rustc --version
+cargo --version
+tshark --version
+command -v capinfos text2pcap pdftotext pdfinfo pdfimages sort uniq head tail cut wc grep awk
+```
+
+A versão foi validada com **Rust 1.97.1** e **TShark 4.6.6**. Verifique a versão de Rust fornecida pela distribuição antes de compilar. O Cargo instala as bibliotecas Rust declaradas em [Cargo.toml](Cargo.toml) de acordo com o [Cargo.lock](Cargo.lock). As ferramentas da tabela são instaladas separadamente no sistema. Veja o [manual de instalação](docs/manual.md#instalação-e-requisitos) para mais detalhes.
+
 ## Instalação e primeiros passos
 
-Instale Git e uma toolchain Rust com suporte à edição 2024. A versão foi validada com Rust **1.97.1**. Para analisar capturas, coloque `tshark` e `capinfos` no `PATH`. A conversão de logs usa `text2pcap`; as ações de PDF usam ferramentas do Poppler. Consulte a [lista de dependências e como verificá-las](docs/manual.md#instalação-e-requisitos).
-
-Com acesso ao repositório, rode:
+Com as dependências instaladas, rode:
 
 ```bash
 git clone https://github.com/Henr1sky/SonarK.git
