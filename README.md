@@ -1,5 +1,23 @@
 # SonarK
 
+```text
+                 :
+          .     t#,     L.                                      G:
+         ;W    ;##W.    EW:        ,ft               j.         E#,    :
+        f#E   :#L:WE    E##;       t#E            .. EW,        E#t  .GE
+      .E#f   .KG  ,#D   E###t      t#E           ;W, E##j       E#t j#K;
+     iWW;    EE    ;#f  E#fE#f     t#E          j##, E###D.     E#GK#f
+    L##Lffi f#.     t#i E#t D#G    t#E         G###, E#jG#W;    E##D.
+   tLLG##L  :#G     GK  E#t  f#E.  t#E       :E####, E#t t##f   E##Wi
+     ,W#i    ;#L   LW.  E#t   t#K: t#E      ;W#DG##, E#t  :K#E: E#jL#D:
+    j#E.      t#f f#:   E#t    ;#W,t#E     j###DW##, E#KDDDD###iE#t ,K#j
+  .D#j         f#D#;    E#t     :K#D#E    G##i,,G##, E#f,t#Wi,,,E#t   jD
+ ,WK,           G#t     E#t      .E##E  :K#K:   L##, ;#W:  j#t
+ EG.             t      ..         G#E ;##D.    L##, DWi   ,;
+ ,                                  fE ,,,      .,,
+                                     ,
+```
+
 **Análise offline de tráfego e logs no terminal, com ações guiadas para TShark.**
 
 SonarK é uma CLI/TUI para investigar arquivos que você já tem: capturas PCAP/PCAPNG, logs locais e PDFs anexados. Você escolhe a entrada, abre uma ação pelo nome ou ID, ajusta os filtros e consulta o resultado na própria interface. O projeto guarda histórico, favoritos, presets de saída e relatórios.
