@@ -39,10 +39,19 @@ sudo apt install git build-essential cargo rustc tshark wireshark-common poppler
 Verifique `rustc --version` e `cargo --version` antes de compilar. Se a distribuição fornecer uma versão sem suporte à edição 2024, atualize a toolchain. O conjunto de presets desta versão foi testado com TShark **4.6.6**; dissectors e campos podem variar em versões diferentes.
 
 ```bash
+# Baixa o código-fonte do SonarK para uma pasta local.
 git clone https://github.com/Henr1sky/SonarK.git
+
+# Entra na pasta do projeto baixado.
 cd SonarK
+
+# Compila e instala o binário usando as versões fixadas em Cargo.lock.
 cargo install --locked --path .
+
+# Confirma que o binário está acessível e mostra a versão instalada.
 sonark --version
+
+# Abre a interface no projeto investigacao com a captura indicada.
 sonark --project investigacao "/caminho/captura.pcapng"
 ```
 

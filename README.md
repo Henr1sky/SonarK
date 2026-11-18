@@ -68,10 +68,19 @@ A versão foi validada com **Rust 1.97.1** e **TShark 4.6.6**. Verifique a vers�
 Com as dependências instaladas, rode:
 
 ```bash
+# Baixa o código-fonte do SonarK para uma pasta local.
 git clone https://github.com/Henr1sky/SonarK.git
+
+# Entra na pasta do projeto baixado.
 cd SonarK
+
+# Compila e instala o binário usando as versões fixadas em Cargo.lock.
 cargo install --locked --path .
+
+# Confirma que o binário está acessível e mostra a versão instalada.
 sonark --version
+
+# Abre a interface do SonarK no terminal.
 sonark
 ```
 
