@@ -1,0 +1,2904 @@
+[
+  {
+    "id": "1.1",
+    "en": "Protocol hierarchy",
+    "pt": "Hierarquia de protocolos",
+    "kind": "statistics",
+    "taps": [
+      "io,phs"
+    ]
+  },
+  {
+    "id": "1.2",
+    "en": "Endpoints (IPv4, IPv6, TCP, UDP, Ethernet)",
+    "pt": "Endpoints (IPv4, IPv6, TCP, UDP, Ethernet)",
+    "kind": "statistics",
+    "taps": [
+      "endpoints,ip",
+      "endpoints,ipv6",
+      "endpoints,tcp",
+      "endpoints,udp",
+      "endpoints,eth"
+    ]
+  },
+  {
+    "id": "1.3",
+    "en": "Conversations (IPv4, IPv6, TCP, UDP, Ethernet)",
+    "pt": "Conversas (IPv4, IPv6, TCP, UDP, Ethernet)",
+    "kind": "statistics",
+    "taps": [
+      "conv,ip",
+      "conv,ipv6",
+      "conv,tcp",
+      "conv,udp",
+      "conv,eth"
+    ]
+  },
+  {
+    "id": "1.4",
+    "en": "Capture summary",
+    "pt": "Resumo da captura",
+    "kind": "capture_info",
+    "log_query": "summary"
+  },
+  {
+    "id": "1.5",
+    "en": "Source MAC frequency",
+    "pt": "Frequência de MACs de origem",
+    "kind": "fields",
+    "filter": "eth.src",
+    "fields": [
+      "eth.src"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "1.6",
+    "en": "DHCP hostname, MAC and IP evidence",
+    "pt": "Evidências de hostname DHCP, MAC e IP",
+    "kind": "fields",
+    "filter": "dhcp.option.hostname",
+    "fields": [
+      "eth.src",
+      "dhcp.ip.client",
+      "dhcp.ip.your",
+      "dhcp.option.hostname"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "1.7",
+    "en": "Packets and bytes by protocol layer",
+    "pt": "Pacotes e bytes por camada de protocolo",
+    "kind": "statistics",
+    "taps": [
+      "io,phs"
+    ],
+    "log_query": "http_version"
+  },
+  {
+    "id": "1.9",
+    "en": "Traffic timeline (1, 10 and 60 seconds)",
+    "pt": "Timeline de tráfego (1, 10 e 60 segundos)",
+    "kind": "statistics",
+    "taps": [
+      "io,stat,1",
+      "io,stat,10",
+      "io,stat,60"
+    ],
+    "log_query": "minute"
+  },
+  {
+    "id": "1.10",
+    "en": "Wireshark Expert Info",
+    "pt": "Expert Info do Wireshark",
+    "kind": "statistics",
+    "taps": [
+      "expert"
+    ]
+  },
+  {
+    "id": "1.11",
+    "en": "Protocol hierarchy by bytes",
+    "pt": "Hierarquia de protocolos por bytes",
+    "kind": "statistics",
+    "taps": [
+      "io,phs"
+    ]
+  },
+  {
+    "id": "1.12",
+    "en": "Endpoints by traffic volume",
+    "pt": "Endpoints por volume de tráfego",
+    "kind": "statistics",
+    "taps": [
+      "endpoints,ip",
+      "endpoints,ipv6"
+    ],
+    "log_query": "client"
+  },
+  {
+    "id": "1.13",
+    "en": "Frame size distribution",
+    "pt": "Distribuição de tamanhos de quadros",
+    "kind": "fields",
+    "filter": "",
+    "fields": [
+      "frame.len"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "1.14",
+    "en": "Encapsulation (VLAN, GRE, VXLAN, MPLS)",
+    "pt": "Encapsulamento (VLAN, GRE, VXLAN, MPLS)",
+    "kind": "fields",
+    "filter": "vlan || gre || vxlan || mpls",
+    "fields": [
+      "frame.number",
+      "frame.protocols",
+      "vlan.id",
+      "vxlan.vni",
+      "mpls.label"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "1.15",
+    "en": "Capture time window",
+    "pt": "Janela temporal da captura",
+    "kind": "capture_info",
+    "log_query": "timeline",
+    "flags": [
+      "-a",
+      "-e"
+    ]
+  },
+  {
+    "id": "1.16",
+    "en": "IPv4 TTL distribution",
+    "pt": "Distribuição de TTL IPv4",
+    "kind": "fields",
+    "filter": "ip.ttl",
+    "fields": [
+      "ip.ttl"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "1.17",
+    "en": "IPv4 fragments and large frames",
+    "pt": "Fragmentos IPv4 e quadros grandes",
+    "kind": "fields",
+    "filter": "ip.flags.mf == 1 || ip.frag_offset > 0 || frame.len > 1518",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ip.dst",
+      "frame.len",
+      "ip.frag_offset"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "1.18",
+    "en": "Ethernet unicast, multicast and broadcast counts",
+    "pt": "Contagem Ethernet unicast, multicast e broadcast",
+    "kind": "fields",
+    "filter": "eth.dst",
+    "fields": [
+      "eth.dst"
+    ],
+    "mode": "raw",
+    "transform": "mac_kind"
+  },
+  {
+    "id": "1.20",
+    "en": "Undecoded or malformed frames",
+    "pt": "Quadros sem dissecação ou malformados",
+    "kind": "fields",
+    "filter": "data || _ws.malformed",
+    "fields": [
+      "frame.number",
+      "frame.protocols",
+      "_ws.expert.message"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "1.24",
+    "en": "TCP retransmission and duplicate ACK events",
+    "pt": "Eventos de retransmissão TCP e ACK duplicado",
+    "kind": "fields",
+    "filter": "tcp.analysis.retransmission || tcp.analysis.fast_retransmission || tcp.analysis.spurious_retransmission || tcp.analysis.duplicate_ack",
+    "fields": [
+      "frame.number",
+      "tcp.stream",
+      "ip.src",
+      "ipv6.src",
+      "_ws.expert.message"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "2.1",
+    "en": "Observed TCP initiators (SYN)",
+    "pt": "Iniciadores TCP observados (SYN)",
+    "kind": "fields",
+    "filter": "tcp.flags.syn == 1 && tcp.flags.ack == 0",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "tcp.dstport"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "2.2",
+    "en": "Observed TCP responders (SYN+ACK)",
+    "pt": "Respondentes TCP observados (SYN+ACK)",
+    "kind": "fields",
+    "filter": "tcp.flags.syn == 1 && tcp.flags.ack == 1",
+    "fields": [
+      "ip.src",
+      "ipv6.src"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "2.3",
+    "en": "IP and MAC source pairs",
+    "pt": "Pares de IP e MAC de origem",
+    "kind": "fields",
+    "filter": "eth.src && (ip || ipv6)",
+    "fields": [
+      "eth.src",
+      "ip.src",
+      "ipv6.src"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "2.4",
+    "en": "Observed DHCP and DNS names",
+    "pt": "Nomes observados em DHCP e DNS",
+    "kind": "fields",
+    "filter": "dhcp.option.hostname || dns.flags.response == 1 || nbns.name",
+    "fields": [
+      "frame.number",
+      "dhcp.option.hostname",
+      "dns.qry.name",
+      "dns.a",
+      "dns.aaaa",
+      "nbns.name"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "2.5",
+    "en": "TCP source port frequencies by source",
+    "pt": "Frequência de portas TCP de origem por origem",
+    "kind": "fields",
+    "filter": "tcp",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "tcp.srcport"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "2.7",
+    "en": "TCP flag distribution",
+    "pt": "Distribuição de flags TCP",
+    "kind": "fields",
+    "filter": "tcp",
+    "fields": [
+      "tcp.flags.str"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "2.9",
+    "en": "Observed IP pairs",
+    "pt": "Pares de IPs observados",
+    "kind": "fields",
+    "filter": "ip || ipv6",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "2.10",
+    "en": "IPv4 destinations outside RFC 1918 ranges",
+    "pt": "Destinos IPv4 fora das faixas RFC 1918",
+    "kind": "fields",
+    "filter": "ip.dst && !(ip.dst in {10.0.0.0/8,172.16.0.0/12,192.168.0.0/16})",
+    "fields": [
+      "ip.dst"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "2.11",
+    "en": "Destination port frequencies by host",
+    "pt": "Frequência de portas de destino por host",
+    "kind": "fields",
+    "filter": "tcp || udp",
+    "fields": [
+      "ip.dst",
+      "ipv6.dst",
+      "tcp.dstport",
+      "udp.dstport"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "2.12",
+    "en": "Dynamic-range ports in TCP SYN packets",
+    "pt": "Portas da faixa dinâmica em pacotes TCP SYN",
+    "kind": "fields",
+    "filter": "tcp.srcport >= 49152 && tcp.flags.syn == 1 && tcp.flags.ack == 0",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "tcp.srcport"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "2.13",
+    "en": "Communication pairs by frequency",
+    "pt": "Pares de comunicação por frequência",
+    "kind": "fields",
+    "filter": "ip || ipv6",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "2.14",
+    "en": "IP conversation evidence for pivot analysis",
+    "pt": "Conversas IP para investigar pivôs",
+    "kind": "fields",
+    "filter": "ip || ipv6",
+    "fields": [
+      "frame.time_epoch",
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "2.15",
+    "en": "Observed HTTP X-Forwarded-For values",
+    "pt": "Valores HTTP X-Forwarded-For observados",
+    "kind": "fields",
+    "filter": "http.x_forwarded_for",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "http.host",
+      "http.x_forwarded_for"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "2.19",
+    "en": "MAC and IP observations per VLAN",
+    "pt": "Observações de MAC e IP por VLAN",
+    "kind": "fields",
+    "filter": "vlan && eth.src",
+    "fields": [
+      "vlan.id",
+      "eth.src",
+      "ip.src",
+      "ipv6.src"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "2.20",
+    "en": "Passive TCP SYN characteristics",
+    "pt": "Características passivas de TCP SYN",
+    "kind": "fields",
+    "filter": "tcp.flags.syn == 1 && tcp.flags.ack == 0",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "ip.ttl",
+      "ipv6.hlim",
+      "tcp.window_size_value",
+      "tcp.options.mss_val"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "2.21",
+    "en": "Multiple Ethernet source MACs observed for one IPv4 address",
+    "pt": "Múltiplos MACs Ethernet de origem observados para um IPv4",
+    "kind": "fields",
+    "filter": "ip.src && eth.src",
+    "fields": [
+      "ip.src",
+      "eth.src"
+    ],
+    "mode": "raw",
+    "transform": "conflicting_values"
+  },
+  {
+    "id": "3.1",
+    "en": "TCP ports observed sending SYN+ACK",
+    "pt": "Portas TCP observadas enviando SYN+ACK",
+    "kind": "fields",
+    "filter": "tcp.flags.syn == 1 && tcp.flags.ack == 1",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "tcp.srcport"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "3.2",
+    "en": "TCP ports observed sending RST",
+    "pt": "Portas TCP observadas enviando RST",
+    "kind": "fields",
+    "filter": "tcp.flags.reset == 1",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "tcp.srcport"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "3.4",
+    "en": "Flows carrying TCP payload",
+    "pt": "Fluxos com payload TCP",
+    "kind": "fields",
+    "filter": "tcp.len > 0",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "tcp.srcport",
+      "ip.dst",
+      "ipv6.dst",
+      "tcp.dstport"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "3.5",
+    "en": "Ports sending TCP FIN",
+    "pt": "Portas enviando TCP FIN",
+    "kind": "fields",
+    "filter": "tcp.flags.fin == 1",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "tcp.srcport"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "3.6",
+    "en": "Observed UDP source ports",
+    "pt": "Portas de origem UDP observadas",
+    "kind": "fields",
+    "filter": "udp",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "udp.srcport"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "3.7",
+    "en": "TCP SYN destination port frequency",
+    "pt": "Frequência de portas de destino de SYN",
+    "kind": "fields",
+    "filter": "tcp.flags.syn == 1 && tcp.flags.ack == 0",
+    "fields": [
+      "tcp.dstport"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "3.8",
+    "en": "TCP payload samples by source port",
+    "pt": "Amostras de payload TCP por porta de origem",
+    "kind": "fields",
+    "filter": "tcp.len > 0",
+    "fields": [
+      "tcp.srcport",
+      "tcp.payload"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "3.9",
+    "en": "Ports and dissected protocols",
+    "pt": "Portas e protocolos dissecados",
+    "kind": "fields",
+    "filter": "tcp || udp",
+    "fields": [
+      "tcp.dstport",
+      "udp.dstport",
+      "frame.protocols"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "3.10",
+    "en": "Timestamped TCP SYN attempts",
+    "pt": "Tentativas TCP SYN com horário",
+    "kind": "fields",
+    "filter": "tcp.flags.syn == 1 && tcp.flags.ack == 0",
+    "fields": [
+      "frame.time_relative",
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst",
+      "tcp.dstport"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "3.11",
+    "en": "TCP destination ports per host",
+    "pt": "Portas TCP de destino por host",
+    "kind": "fields",
+    "filter": "tcp",
+    "fields": [
+      "ip.dst",
+      "ipv6.dst",
+      "tcp.dstport"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "3.12",
+    "en": "RST source and destination pairs",
+    "pt": "Origens e destinos de RST",
+    "kind": "fields",
+    "filter": "tcp.flags.reset == 1",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "tcp.srcport",
+      "ip.dst",
+      "ipv6.dst",
+      "tcp.dstport"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "3.13",
+    "en": "Payload observed on high TCP ports",
+    "pt": "Payload observado em portas TCP altas",
+    "kind": "fields",
+    "filter": "tcp.dstport >= 1024 && tcp.len > 0",
+    "fields": [
+      "tcp.dstport",
+      "frame.protocols",
+      "tcp.payload"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "3.14",
+    "en": "UDP destination observations by source",
+    "pt": "Destinos UDP observados por origem",
+    "kind": "fields",
+    "filter": "udp",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst",
+      "udp.dstport"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "3.15",
+    "en": "TCP XMAS, NULL and FIN indicators",
+    "pt": "Indícios de TCP XMAS, NULL e FIN",
+    "kind": "fields",
+    "filter": "tcp.flags == 0x029 || tcp.flags == 0 || tcp.flags == 1",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst",
+      "tcp.dstport",
+      "tcp.flags"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "3.16",
+    "en": "TCP SYN attempt timings",
+    "pt": "Horários de tentativas TCP SYN",
+    "kind": "fields",
+    "filter": "tcp.flags.syn == 1 && tcp.flags.ack == 0",
+    "fields": [
+      "frame.time_relative",
+      "ip.src",
+      "ipv6.src",
+      "tcp.dstport"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "3.19",
+    "en": "Timestamped destinations for port-knock review",
+    "pt": "Destinos com horários para analisar port knocking",
+    "kind": "fields",
+    "filter": "tcp.flags.syn == 1 && tcp.flags.ack == 0",
+    "fields": [
+      "frame.time_relative",
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst",
+      "tcp.dstport"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "3.20",
+    "en": "TCP SYN, SYN+ACK and RST sequence evidence",
+    "pt": "Evidências de sequência TCP SYN, SYN+ACK e RST",
+    "kind": "fields",
+    "filter": "tcp.flags.syn == 1 || tcp.flags.reset == 1",
+    "fields": [
+      "frame.number",
+      "tcp.stream",
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst",
+      "tcp.flags.str"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "4.1",
+    "en": "Raw TCP payload in hex",
+    "pt": "Payload TCP bruto em hex",
+    "kind": "fields",
+    "filter": "tcp.payload",
+    "fields": [
+      "tcp.payload"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "4.2",
+    "en": "Decode TCP payload hex as text per segment",
+    "pt": "Decodificar hex de payload TCP como texto por segmento",
+    "kind": "payload_text",
+    "format": "decoded"
+  },
+  {
+    "id": "4.3",
+    "en": "Search TCP payload (set a text display filter)",
+    "pt": "Buscar no payload TCP (defina o filtro de texto)",
+    "kind": "fields",
+    "filter": "tcp.payload",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "tcp.payload"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "4.4",
+    "en": "TCP payload and source IP",
+    "pt": "Payload TCP e IP de origem",
+    "kind": "fields",
+    "filter": "tcp.payload",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "tcp.payload"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "4.5",
+    "en": "TCP payload and socket pairs",
+    "pt": "Payload TCP e pares de sockets",
+    "kind": "fields",
+    "filter": "tcp.payload",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "tcp.srcport",
+      "ip.dst",
+      "ipv6.dst",
+      "tcp.dstport",
+      "tcp.payload"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "4.6",
+    "en": "TCP payload by port (add a port filter)",
+    "pt": "Payload TCP por porta (adicione filtro de porta)",
+    "kind": "fields",
+    "filter": "tcp.payload",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "tcp.srcport",
+      "tcp.dstport",
+      "tcp.payload"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "4.7",
+    "en": "Printable strings in TCP payload",
+    "pt": "Strings imprimíveis em payload TCP",
+    "kind": "payload_text",
+    "format": "printable"
+  },
+  {
+    "id": "4.8",
+    "en": "Follow TCP stream (ASCII)",
+    "pt": "Seguir stream TCP (ASCII)",
+    "kind": "follow",
+    "protocol": "tcp"
+  },
+  {
+    "id": "4.9",
+    "en": "Follow UDP stream (ASCII)",
+    "pt": "Seguir stream UDP (ASCII)",
+    "kind": "follow",
+    "protocol": "udp"
+  },
+  {
+    "id": "4.10",
+    "en": "Search TCP payload (set a byte-sequence display filter)",
+    "pt": "Buscar no payload TCP (defina o filtro de assinatura em bytes)",
+    "kind": "fields",
+    "filter": "tcp.payload",
+    "fields": [
+      "frame.number",
+      "tcp.stream",
+      "ip.src",
+      "ipv6.src"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "4.11",
+    "en": "TCP payload by host (add a host filter)",
+    "pt": "Payload TCP por host (adicione filtro de host)",
+    "kind": "fields",
+    "filter": "tcp.payload",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst",
+      "tcp.payload"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "4.14",
+    "en": "Mean positive TCP payload size per stream",
+    "pt": "Tamanho médio de payload TCP positivo por stream",
+    "kind": "fields",
+    "filter": "tcp.len > 0",
+    "fields": [
+      "tcp.stream",
+      "tcp.len"
+    ],
+    "mode": "raw",
+    "transform": "mean_by_key"
+  },
+  {
+    "id": "4.18",
+    "en": "Search TCP payload (set a regex display filter)",
+    "pt": "Buscar no payload TCP (defina o filtro por regex)",
+    "kind": "fields",
+    "filter": "tcp.payload",
+    "fields": [
+      "frame.number",
+      "tcp.stream",
+      "tcp.payload"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "4.19",
+    "en": "Retransmission and out-of-order stream evidence",
+    "pt": "Evidências de retransmissão e segmentos fora de ordem",
+    "kind": "fields",
+    "filter": "tcp.analysis.retransmission || tcp.analysis.out_of_order",
+    "fields": [
+      "tcp.stream",
+      "frame.number",
+      "tcp.seq"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "5.1",
+    "en": "Referer",
+    "pt": "Referer",
+    "kind": "fields",
+    "filter": "http.referer",
+    "fields": [
+      "http.referer"
+    ],
+    "mode": "raw",
+    "log_query": "referer"
+  },
+  {
+    "id": "5.2",
+    "en": "User-Agent",
+    "pt": "User-Agent",
+    "kind": "fields",
+    "filter": "http.user_agent",
+    "fields": [
+      "http.user_agent"
+    ],
+    "mode": "raw",
+    "log_query": "user_agent"
+  },
+  {
+    "id": "5.3",
+    "en": "Host",
+    "pt": "Host",
+    "kind": "fields",
+    "filter": "http.host",
+    "fields": [
+      "http.host"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "5.4",
+    "en": "Requested URIs",
+    "pt": "URIs requisitadas",
+    "kind": "fields",
+    "filter": "http.request.uri",
+    "fields": [
+      "http.request.uri"
+    ],
+    "mode": "raw",
+    "log_query": "uri"
+  },
+  {
+    "id": "5.5",
+    "en": "Server header",
+    "pt": "Cabeçalho Server",
+    "kind": "fields",
+    "filter": "http.server",
+    "fields": [
+      "http.server"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "5.6",
+    "en": "HTTP methods",
+    "pt": "Métodos HTTP",
+    "kind": "fields",
+    "filter": "http.request.method",
+    "fields": [
+      "http.request.method"
+    ],
+    "mode": "raw",
+    "log_query": "method"
+  },
+  {
+    "id": "5.7",
+    "en": "HTTP status codes",
+    "pt": "Códigos de status HTTP",
+    "kind": "fields",
+    "filter": "http.response.code",
+    "fields": [
+      "http.response.code"
+    ],
+    "mode": "raw",
+    "log_query": "status"
+  },
+  {
+    "id": "5.8",
+    "en": "URL query strings",
+    "pt": "Parâmetros de URL",
+    "kind": "fields",
+    "filter": "http.request.uri.query",
+    "fields": [
+      "http.request.uri.query"
+    ],
+    "mode": "raw",
+    "log_query": "query_string"
+  },
+  {
+    "id": "5.9",
+    "en": "HTTP request headers",
+    "pt": "Cabeçalhos HTTP de requisição",
+    "kind": "fields",
+    "filter": "http.request.line",
+    "fields": [
+      "frame.number",
+      "http.request.line"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "5.10",
+    "en": "HTTP cookie header presence",
+    "pt": "Presença de cabeçalhos de cookies HTTP",
+    "kind": "fields",
+    "filter": "http.cookie || http.set_cookie",
+    "fields": [
+      "frame.number",
+      "http.host",
+      "http.request.uri"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "5.12",
+    "en": "HTTP POST bodies",
+    "pt": "Corpos de requisições HTTP POST",
+    "kind": "fields",
+    "filter": "http.request.method == \"POST\" && http.file_data",
+    "fields": [
+      "frame.number",
+      "http.host",
+      "http.request.uri",
+      "http.file_data"
+    ],
+    "mode": "raw",
+    "log_query": "post"
+  },
+  {
+    "id": "5.13",
+    "en": "Export HTTP objects",
+    "pt": "Exportar objetos HTTP",
+    "kind": "objects",
+    "protocol": "http"
+  },
+  {
+    "id": "5.14",
+    "en": "HTTP redirects",
+    "pt": "Redirecionamentos HTTP",
+    "kind": "fields",
+    "filter": "http.response.code >= 300 && http.response.code < 400",
+    "fields": [
+      "frame.number",
+      "http.response.code",
+      "http.location"
+    ],
+    "mode": "raw",
+    "log_query": "redirect"
+  },
+  {
+    "id": "5.15",
+    "en": "HTTP requests by Host header",
+    "pt": "Requisições HTTP pelo cabeçalho Host",
+    "kind": "fields",
+    "filter": "http.request && http.host",
+    "fields": [
+      "http.host"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "5.16",
+    "en": "HTTP request timeline",
+    "pt": "Timeline de requisições HTTP",
+    "kind": "fields",
+    "filter": "http.request",
+    "fields": [
+      "frame.time_epoch",
+      "http.request.method",
+      "http.host",
+      "http.request.uri"
+    ],
+    "mode": "raw",
+    "log_query": "timeline"
+  },
+  {
+    "id": "5.17",
+    "en": "Multipart HTTP uploads",
+    "pt": "Uploads HTTP multipart",
+    "kind": "fields",
+    "filter": "http.request.method == \"POST\" && http.content_type contains \"multipart/form-data\"",
+    "fields": [
+      "frame.number",
+      "http.host",
+      "http.request.uri",
+      "http.content_type"
+    ],
+    "mode": "raw",
+    "log_query": "post"
+  },
+  {
+    "id": "5.18",
+    "en": "HTTP content disposition",
+    "pt": "Content-Disposition em HTTP",
+    "kind": "fields",
+    "filter": "http.response.line matches \"(?i)^content-disposition:\"",
+    "fields": [
+      "frame.number",
+      "http.response.line"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "5.19",
+    "en": "HTTP/2 and HTTP/3 frames",
+    "pt": "Quadros HTTP/2 e HTTP/3",
+    "kind": "fields",
+    "filter": "http2 || http3",
+    "fields": [
+      "frame.number",
+      "frame.protocols"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "5.20",
+    "en": "HTTP proxy CONNECT requests",
+    "pt": "Requisições HTTP CONNECT de proxy",
+    "kind": "fields",
+    "filter": "http.request.method == \"CONNECT\"",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "http.host",
+      "http.request.uri"
+    ],
+    "mode": "raw",
+    "log_query": "connect"
+  },
+  {
+    "id": "5.21",
+    "en": "HTTP WebSocket upgrades",
+    "pt": "Upgrades HTTP para WebSocket",
+    "kind": "fields",
+    "filter": "http.upgrade contains \"websocket\"",
+    "fields": [
+      "frame.number",
+      "http.host",
+      "http.request.uri",
+      "http.upgrade"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "5.22",
+    "en": "HTTP JSON content metadata",
+    "pt": "Metadados de conteúdo JSON via HTTP",
+    "kind": "fields",
+    "filter": "http.content_type contains \"application/json\"",
+    "fields": [
+      "frame.number",
+      "http.host",
+      "http.request.uri",
+      "http.content_length_header"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "5.23",
+    "en": "HTTP CORS headers",
+    "pt": "Cabeçalhos HTTP de CORS",
+    "kind": "fields",
+    "filter": "http.response.line matches \"(?i)^access-control-allow-origin:\"",
+    "fields": [
+      "frame.number",
+      "http.response.line"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "5.24",
+    "en": "HTTP cache headers",
+    "pt": "Cabeçalhos HTTP de cache",
+    "kind": "fields",
+    "filter": "http.cache_control",
+    "fields": [
+      "frame.number",
+      "http.cache_control"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "5.32",
+    "en": "Multiple dissected HTTP requests in one frame",
+    "pt": "Múltiplas requisições HTTP dissecadas no mesmo quadro",
+    "kind": "fields",
+    "filter": "count(http.request.method) > 1",
+    "fields": [
+      "frame.number",
+      "tcp.stream",
+      "http.request.method",
+      "http.request.uri"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "6.1",
+    "en": "FTP server banner",
+    "pt": "Banner do servidor FTP",
+    "kind": "fields",
+    "filter": "ftp.response.code == 220",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "ftp.response.arg"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "6.3",
+    "en": "FTP command frequency",
+    "pt": "Frequência de comandos FTP",
+    "kind": "fields",
+    "filter": "ftp.request.command",
+    "fields": [
+      "ftp.request.command"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "6.4",
+    "en": "FTP response codes",
+    "pt": "Códigos de resposta FTP",
+    "kind": "fields",
+    "filter": "ftp.response.code",
+    "fields": [
+      "ftp.response.code"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "6.6",
+    "en": "FTP passive-mode transactions",
+    "pt": "Transações FTP em modo passivo",
+    "kind": "fields",
+    "filter": "ftp.request.command == \"PASV\" || ftp.response.code == 227",
+    "fields": [
+      "frame.number",
+      "tcp.stream",
+      "ftp.request.command",
+      "ftp.response.arg"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "6.7",
+    "en": "FTP active-mode address and port",
+    "pt": "Endereço e porta do modo ativo FTP",
+    "kind": "fields",
+    "filter": "ftp.request.command == \"PORT\"",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "ftp.request.arg"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "6.8",
+    "en": "FTP transfer requests",
+    "pt": "Solicitações de transferência FTP",
+    "kind": "fields",
+    "filter": "ftp.request.command == \"RETR\" || ftp.request.command == \"STOR\"",
+    "fields": [
+      "frame.number",
+      "ftp.request.command",
+      "ftp.request.arg"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "6.9",
+    "en": "Export FTP data objects",
+    "pt": "Exportar objetos de dados FTP",
+    "kind": "objects",
+    "protocol": "ftp-data"
+  },
+  {
+    "id": "6.10",
+    "en": "FTP login failures",
+    "pt": "Falhas de login FTP",
+    "kind": "fields",
+    "filter": "ftp.response.code == 530",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "6.12",
+    "en": "Anonymous FTP login attempts",
+    "pt": "Tentativas de login FTP anônimo",
+    "kind": "fields",
+    "filter": "ftp.request.command == \"USER\" && ftp.request.arg == \"anonymous\"",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "6.13",
+    "en": "TLS handshakes on FTP ports",
+    "pt": "Handshakes TLS em portas FTP",
+    "kind": "fields",
+    "filter": "tls.handshake && (tcp.port == 21 || tcp.port == 990)",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "6.15",
+    "en": "FTP transfer timeline by stream",
+    "pt": "Timeline de transferências FTP por stream",
+    "kind": "fields",
+    "filter": "ftp.request.command == \"RETR\" || ftp.request.command == \"STOR\"",
+    "fields": [
+      "frame.time_epoch",
+      "tcp.stream",
+      "ftp.request.command",
+      "ftp.request.arg"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "6.16",
+    "en": "FTP PORT requests for bounce review",
+    "pt": "Requisições FTP PORT para investigar bounce",
+    "kind": "fields",
+    "filter": "ftp.request.command == \"PORT\"",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst",
+      "ftp.request.arg"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "7.1",
+    "en": "SMTP envelope commands",
+    "pt": "Comandos de envelope SMTP",
+    "kind": "fields",
+    "filter": "smtp.req.command == \"MAIL\" || smtp.req.command == \"RCPT\"",
+    "fields": [
+      "frame.number",
+      "smtp.req.command",
+      "smtp.req.parameter"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "7.2",
+    "en": "Recorded mail subjects",
+    "pt": "Assuntos de e-mail registrados",
+    "kind": "fields",
+    "filter": "imf.subject",
+    "fields": [
+      "frame.number",
+      "imf.subject"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "7.4",
+    "en": "MIME attachment metadata",
+    "pt": "Metadados de anexos MIME",
+    "kind": "fields",
+    "filter": "mime_multipart.header.content-disposition",
+    "fields": [
+      "frame.number",
+      "mime_multipart.header.content-disposition"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "7.5",
+    "en": "SMTP endpoints",
+    "pt": "Endpoints SMTP",
+    "kind": "fields",
+    "filter": "smtp",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "7.6",
+    "en": "POP command names",
+    "pt": "Nomes de comandos POP",
+    "kind": "fields",
+    "filter": "pop.request.command",
+    "fields": [
+      "frame.number",
+      "pop.request.command"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "7.7",
+    "en": "IMAP command names",
+    "pt": "Nomes de comandos IMAP",
+    "kind": "fields",
+    "filter": "imap.request.command",
+    "fields": [
+      "frame.number",
+      "imap.request.command"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "7.8",
+    "en": "Export Internet Message Format objects",
+    "pt": "Exportar objetos de mensagens IMF",
+    "kind": "objects",
+    "protocol": "imf"
+  },
+  {
+    "id": "7.9",
+    "en": "TLS on SMTP ports",
+    "pt": "TLS em portas SMTP",
+    "kind": "fields",
+    "filter": "tls.handshake && (tcp.port == 465 || tcp.port == 587 || tcp.port == 25)",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "tcp.srcport",
+      "tcp.dstport"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "7.10",
+    "en": "SMTP AUTH events",
+    "pt": "Eventos SMTP AUTH",
+    "kind": "fields",
+    "filter": "smtp.req.command == \"AUTH\"",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "7.13",
+    "en": "Recorded message From and Return-Path headers",
+    "pt": "Cabeçalhos From e Return-Path de mensagens registradas",
+    "kind": "fields",
+    "filter": "imf.from || imf.return_path",
+    "fields": [
+      "frame.number",
+      "imf.from",
+      "imf.return_path"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "7.14",
+    "en": "SMTP envelope frequency by source",
+    "pt": "Frequência de envelopes SMTP por origem",
+    "kind": "fields",
+    "filter": "smtp.req.command == \"MAIL\"",
+    "fields": [
+      "ip.src",
+      "ipv6.src"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "8.1",
+    "en": "Export FTP objects",
+    "pt": "Exportar objetos FTP",
+    "kind": "objects",
+    "protocol": "ftp-data"
+  },
+  {
+    "id": "8.2",
+    "en": "Export HTTP objects",
+    "pt": "Exportar objetos HTTP",
+    "kind": "objects",
+    "protocol": "http"
+  },
+  {
+    "id": "8.3",
+    "en": "Export SMB objects",
+    "pt": "Exportar objetos SMB",
+    "kind": "objects",
+    "protocol": "smb"
+  },
+  {
+    "id": "8.4",
+    "en": "Export TFTP objects",
+    "pt": "Exportar objetos TFTP",
+    "kind": "objects",
+    "protocol": "tftp"
+  },
+  {
+    "id": "8.9",
+    "en": "Export DICOM objects",
+    "pt": "Exportar objetos DICOM",
+    "kind": "objects",
+    "protocol": "dicom"
+  },
+  {
+    "id": "8.13",
+    "en": "Chunked HTTP transfers",
+    "pt": "Transferências HTTP em chunks",
+    "kind": "fields",
+    "filter": "http.transfer_encoding contains \"chunked\"",
+    "fields": [
+      "frame.number",
+      "http.transfer_encoding"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "8.14",
+    "en": "ZIP, RAR and 7z signatures in TCP payload",
+    "pt": "Assinaturas ZIP, RAR e 7z em payload TCP",
+    "kind": "fields",
+    "filter": "tcp.payload contains 50:4b:03:04 || tcp.payload contains 52:61:72:21 || tcp.payload contains 37:7a:bc:af:27:1c",
+    "fields": [
+      "frame.number",
+      "tcp.stream",
+      "ip.src",
+      "ipv6.src"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "8.16",
+    "en": "Captured TCP payload bytes by IPv4 destination",
+    "pt": "Bytes de payload TCP capturados por destino IPv4",
+    "kind": "fields",
+    "filter": "ip.dst && tcp.len > 0",
+    "fields": [
+      "ip.dst",
+      "tcp.len"
+    ],
+    "mode": "raw",
+    "transform": "sum_by_key"
+  },
+  {
+    "id": "9.1",
+    "en": "SMB endpoint pairs",
+    "pt": "Pares de endpoints SMB",
+    "kind": "fields",
+    "filter": "smb || smb2",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "9.2",
+    "en": "SMB2 share paths",
+    "pt": "Caminhos de compartilhamento SMB2",
+    "kind": "fields",
+    "filter": "smb2.tree",
+    "fields": [
+      "frame.number",
+      "smb2.tree"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "9.3",
+    "en": "SMB2 file names",
+    "pt": "Nomes de arquivos SMB2",
+    "kind": "fields",
+    "filter": "smb2.filename",
+    "fields": [
+      "frame.number",
+      "smb2.filename"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "9.4",
+    "en": "NTLM authentication events",
+    "pt": "Eventos de autenticação NTLM",
+    "kind": "fields",
+    "filter": "ntlmssp.messagetype == 3",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "ntlmssp.auth.domain",
+      "ntlmssp.auth.username"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "9.5",
+    "en": "Export SMB objects",
+    "pt": "Exportar objetos SMB",
+    "kind": "objects",
+    "protocol": "smb"
+  },
+  {
+    "id": "9.6",
+    "en": "SMB and SMB2 protocol versions",
+    "pt": "Versões dos protocolos SMB e SMB2",
+    "kind": "fields",
+    "filter": "smb || smb2",
+    "fields": [
+      "frame.protocols",
+      "smb2.dialect"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "9.7",
+    "en": "SMB2 signing flag observations",
+    "pt": "Observações da flag de assinatura SMB2",
+    "kind": "fields",
+    "filter": "smb2.flags.signature",
+    "fields": [
+      "frame.number",
+      "smb2.flags.signature"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "9.9",
+    "en": "NetBIOS names",
+    "pt": "Nomes NetBIOS",
+    "kind": "fields",
+    "filter": "nbns.name",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "nbns.name"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "10.1",
+    "en": "DNS queries",
+    "pt": "Consultas DNS",
+    "kind": "fields",
+    "filter": "dns.flags.response == 0 && dns.qry.name",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "dns.qry.name",
+      "dns.qry.type"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "10.2",
+    "en": "DNS responses",
+    "pt": "Respostas DNS",
+    "kind": "fields",
+    "filter": "dns.flags.response == 1",
+    "fields": [
+      "frame.number",
+      "dns.qry.name",
+      "dns.flags.rcode",
+      "dns.a",
+      "dns.aaaa",
+      "dns.cname"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "10.3",
+    "en": "NXDOMAIN by query",
+    "pt": "NXDOMAIN por consulta",
+    "kind": "fields",
+    "filter": "dns.flags.rcode == 3 && dns.qry.name",
+    "fields": [
+      "dns.qry.name"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "10.4",
+    "en": "DNS record types",
+    "pt": "Tipos de registro DNS",
+    "kind": "fields",
+    "filter": "dns.resp.type",
+    "fields": [
+      "dns.resp.type"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "10.5",
+    "en": "Most queried DNS names",
+    "pt": "Nomes DNS mais consultados",
+    "kind": "fields",
+    "filter": "dns.flags.response == 0 && dns.qry.name",
+    "fields": [
+      "dns.qry.name"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "10.6",
+    "en": "DNS TXT responses for tunnel review",
+    "pt": "Respostas DNS TXT para investigar túnel",
+    "kind": "fields",
+    "filter": "dns.txt",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "dns.qry.name",
+      "dns.txt"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "10.7",
+    "en": "Long DNS query names",
+    "pt": "Nomes DNS longos",
+    "kind": "fields",
+    "filter": "dns.qry.name.len > 50",
+    "fields": [
+      "frame.number",
+      "dns.qry.name"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "10.8",
+    "en": "DNS server address frequency",
+    "pt": "Frequência de endereços de servidores DNS",
+    "kind": "fields",
+    "filter": "dns.flags.response == 0",
+    "fields": [
+      "ip.dst",
+      "ipv6.dst"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "10.9",
+    "en": "Multiple recorded IPv4 DNS answers per query",
+    "pt": "Múltiplas respostas IPv4 de DNS por consulta",
+    "kind": "fields",
+    "filter": "dns.flags.response == 1 && dns.qry.name && dns.a",
+    "fields": [
+      "dns.qry.name",
+      "dns.a"
+    ],
+    "mode": "raw",
+    "transform": "conflicting_values"
+  },
+  {
+    "id": "10.10",
+    "en": "DNS answer addresses and TTLs",
+    "pt": "Endereços de respostas DNS e TTLs",
+    "kind": "fields",
+    "filter": "dns.flags.response == 1 && (dns.a || dns.aaaa)",
+    "fields": [
+      "dns.qry.name",
+      "dns.a",
+      "dns.aaaa",
+      "dns.resp.ttl"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "10.11",
+    "en": "Visible DNS-over-HTTPS HTTP content type",
+    "pt": "Content-Type HTTP visível de DNS sobre HTTPS",
+    "kind": "fields",
+    "filter": "http.content_type contains \"application/dns-message\"",
+    "fields": [
+      "frame.number",
+      "http.host",
+      "http.request.uri",
+      "http.content_type"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "10.12",
+    "en": "TLS handshakes on DNS-over-TLS port",
+    "pt": "Handshakes TLS na porta de DNS sobre TLS",
+    "kind": "fields",
+    "filter": "tls.handshake && tcp.port == 853",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "10.13",
+    "en": "DNSSEC record observations",
+    "pt": "Observações de registros DNSSEC",
+    "kind": "fields",
+    "filter": "dns.resp.type in {43,46,47,48,50,51}",
+    "fields": [
+      "frame.number",
+      "dns.qry.name",
+      "dns.resp.type"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "11.1",
+    "en": "TLS server names (SNI)",
+    "pt": "Nomes de servidor TLS (SNI)",
+    "kind": "fields",
+    "filter": "tls.handshake.extensions_server_name",
+    "fields": [
+      "frame.number",
+      "tls.handshake.extensions_server_name"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "11.2",
+    "en": "TLS certificate names and validity fields",
+    "pt": "Nomes e campos de validade de certificados TLS",
+    "kind": "fields",
+    "filter": "tls.handshake.type == 11",
+    "fields": [
+      "frame.number",
+      "x509sat.uTF8String",
+      "x509ce.dNSName",
+      "x509af.utcTime"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "11.3",
+    "en": "TLS ServerHello version fields",
+    "pt": "Campos de versão do TLS ServerHello",
+    "kind": "fields",
+    "filter": "tls.handshake.type == 2",
+    "fields": [
+      "tls.handshake.version",
+      "tls.handshake.extensions.supported_version"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "11.4",
+    "en": "TLS ServerHello cipher suite",
+    "pt": "Cipher suite do TLS ServerHello",
+    "kind": "fields",
+    "filter": "tls.handshake.type == 2",
+    "fields": [
+      "frame.number",
+      "tls.handshake.ciphersuite"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "11.5",
+    "en": "TLS handshake messages",
+    "pt": "Mensagens de handshake TLS",
+    "kind": "fields",
+    "filter": "tls.handshake.type",
+    "fields": [
+      "frame.number",
+      "tcp.stream",
+      "tls.handshake.type"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "11.6",
+    "en": "JA3 client fingerprints",
+    "pt": "Fingerprints JA3 de clientes",
+    "kind": "fields",
+    "filter": "tls.handshake.ja3",
+    "fields": [
+      "tls.handshake.ja3"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "11.7",
+    "en": "JA3S server fingerprints",
+    "pt": "Fingerprints JA3S de servidores",
+    "kind": "fields",
+    "filter": "tls.handshake.ja3s",
+    "fields": [
+      "tls.handshake.ja3s"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "11.10",
+    "en": "TLS certificate signature algorithms",
+    "pt": "Algoritmos de assinatura de certificados TLS",
+    "kind": "fields",
+    "filter": "tls.handshake.type == 11",
+    "fields": [
+      "frame.number",
+      "x509af.algorithm.id"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "11.14",
+    "en": "TLS decoded outside standard HTTPS ports",
+    "pt": "TLS dissecado fora das portas HTTPS usuais",
+    "kind": "fields",
+    "filter": "tls.handshake && !(tcp.port in {443,8443})",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "tcp.srcport",
+      "tcp.dstport"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "12.1",
+    "en": "ARP requests and replies",
+    "pt": "Requisições e respostas ARP",
+    "kind": "fields",
+    "filter": "arp",
+    "fields": [
+      "frame.number",
+      "arp.opcode",
+      "arp.src.proto_ipv4",
+      "arp.src.hw_mac",
+      "arp.dst.proto_ipv4"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "12.2",
+    "en": "IPv4 addresses announced by multiple ARP source MACs",
+    "pt": "Endereços IPv4 anunciados por múltiplos MACs de origem no ARP",
+    "kind": "fields",
+    "filter": "arp.src.proto_ipv4 && arp.src.hw_mac && arp.src.proto_ipv4 != 0.0.0.0",
+    "fields": [
+      "arp.src.proto_ipv4",
+      "arp.src.hw_mac"
+    ],
+    "mode": "raw",
+    "transform": "conflicting_values"
+  },
+  {
+    "id": "12.3",
+    "en": "Gratuitous ARP",
+    "pt": "ARP gratuito",
+    "kind": "fields",
+    "filter": "arp.isgratuitous",
+    "fields": [
+      "frame.number",
+      "arp.src.proto_ipv4",
+      "arp.src.hw_mac"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "12.4",
+    "en": "ICMP echo requests and replies",
+    "pt": "Requisições e respostas ICMP echo",
+    "kind": "fields",
+    "filter": "icmp.type == 8 || icmp.type == 0",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ip.dst",
+      "icmp.type",
+      "icmp.seq"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "12.5",
+    "en": "Payload evidence in ICMP echo requests",
+    "pt": "Evidências de payload em requisições ICMP echo",
+    "kind": "fields",
+    "filter": "icmp.type == 8 && data.len > 0",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ip.dst",
+      "data.len",
+      "data.data"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "12.6",
+    "en": "ICMP redirects",
+    "pt": "Redirecionamentos ICMP",
+    "kind": "fields",
+    "filter": "icmp.type == 5",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ip.dst",
+      "icmp.redir_gw"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "12.7",
+    "en": "ICMP unreachable and time exceeded",
+    "pt": "ICMP unreachable e time exceeded",
+    "kind": "fields",
+    "filter": "icmp.type == 3 || icmp.type == 11",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ip.dst",
+      "icmp.type",
+      "icmp.code"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "12.8",
+    "en": "Stacked VLAN tags",
+    "pt": "Tags VLAN empilhadas",
+    "kind": "fields",
+    "filter": "count(vlan.id) > 1",
+    "fields": [
+      "frame.number",
+      "eth.src",
+      "eth.dst",
+      "vlan.id"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "12.9",
+    "en": "STP root and bridge observations",
+    "pt": "Observações de raiz e bridge STP",
+    "kind": "fields",
+    "filter": "stp",
+    "fields": [
+      "frame.number",
+      "stp.root.hw",
+      "stp.bridge.hw"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "12.10",
+    "en": "DHCP OFFER and ACK server observations",
+    "pt": "Servidores observados em DHCP OFFER e ACK",
+    "kind": "fields",
+    "filter": "dhcp.option.dhcp in {2,5}",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "dhcp.option.dhcp_server_id"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "12.11",
+    "en": "LLMNR/NBNS responders",
+    "pt": "Respondentes LLMNR/NBNS",
+    "kind": "fields",
+    "filter": "(llmnr && dns.flags.response == 1) || (nbns && nbns.flags.response == 1)",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "dns.qry.name",
+      "nbns.name"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "12.12",
+    "en": "IPv6 router advertisements",
+    "pt": "Anúncios de roteador IPv6",
+    "kind": "fields",
+    "filter": "icmpv6.type == 134",
+    "fields": [
+      "frame.number",
+      "ipv6.src",
+      "icmpv6.nd.ra.router_lifetime"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "12.13",
+    "en": "Wireshark duplicate ARP address evidence",
+    "pt": "Evidência de endereço ARP duplicado no Wireshark",
+    "kind": "fields",
+    "filter": "arp.duplicate-address-detected",
+    "fields": [
+      "frame.number",
+      "arp.src.hw_mac",
+      "arp.src.proto_ipv4"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "12.14",
+    "en": "Unique Ethernet source MACs per 10-second window",
+    "pt": "MACs Ethernet de origem únicos por janela de 10 segundos",
+    "kind": "fields",
+    "filter": "eth.src",
+    "fields": [
+      "frame.time_relative",
+      "eth.src"
+    ],
+    "mode": "raw",
+    "transform": "unique_per_window"
+  },
+  {
+    "id": "13.1",
+    "en": "SIP dialogs",
+    "pt": "Diálogos SIP",
+    "kind": "fields",
+    "filter": "sip.Call-ID",
+    "fields": [
+      "frame.number",
+      "sip.Call-ID",
+      "sip.Method",
+      "sip.Status-Code"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "13.2",
+    "en": "RTP stream identifiers",
+    "pt": "Identificadores de streams RTP",
+    "kind": "fields",
+    "filter": "rtp",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "udp.srcport",
+      "ip.dst",
+      "ipv6.dst",
+      "udp.dstport",
+      "rtp.ssrc"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "13.4",
+    "en": "RTSP requests",
+    "pt": "Requisições RTSP",
+    "kind": "fields",
+    "filter": "rtsp.method",
+    "fields": [
+      "frame.number",
+      "rtsp.method",
+      "rtsp.url"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "13.5",
+    "en": "H.323 endpoint evidence",
+    "pt": "Evidências de endpoints H.323",
+    "kind": "fields",
+    "filter": "h225 || h245",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "13.8",
+    "en": "RTP payload type frequency",
+    "pt": "Frequência de tipos de payload RTP",
+    "kind": "fields",
+    "filter": "rtp",
+    "fields": [
+      "rtp.p_type"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "13.10",
+    "en": "HLS and DASH manifest requests",
+    "pt": "Requisições de manifestos HLS e DASH",
+    "kind": "fields",
+    "filter": "http.request.uri contains \".m3u8\" || http.request.uri contains \".mpd\"",
+    "fields": [
+      "frame.number",
+      "http.host",
+      "http.request.uri"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "14.1",
+    "en": "MySQL queries",
+    "pt": "Consultas MySQL",
+    "kind": "fields",
+    "filter": "mysql.query",
+    "fields": [
+      "frame.number",
+      "mysql.query"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "14.3",
+    "en": "PostgreSQL queries",
+    "pt": "Consultas PostgreSQL",
+    "kind": "fields",
+    "filter": "pgsql.query",
+    "fields": [
+      "frame.number",
+      "pgsql.query"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "14.4",
+    "en": "MSSQL TDS query text",
+    "pt": "Texto de consultas MSSQL TDS",
+    "kind": "fields",
+    "filter": "tds.query",
+    "fields": [
+      "frame.number",
+      "tds.query"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "14.5",
+    "en": "MongoDB frame inventory",
+    "pt": "Inventário de quadros MongoDB",
+    "kind": "fields",
+    "filter": "mongo",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "14.6",
+    "en": "Redis frame inventory",
+    "pt": "Inventário de quadros Redis",
+    "kind": "fields",
+    "filter": "resp",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "14.7",
+    "en": "Cassandra endpoints",
+    "pt": "Endpoints Cassandra",
+    "kind": "fields",
+    "filter": "cql",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "14.8",
+    "en": "Oracle TNS connection data",
+    "pt": "Dados de conexão Oracle TNS",
+    "kind": "fields",
+    "filter": "tns.connect_data",
+    "fields": [
+      "frame.number",
+      "tns.connect_data"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "15.1",
+    "en": "SSH version banner",
+    "pt": "Banner de versão SSH",
+    "kind": "fields",
+    "filter": "ssh.protocol",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "ssh.protocol"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "15.4",
+    "en": "RDP decoded endpoints",
+    "pt": "Endpoints RDP dissecados",
+    "kind": "fields",
+    "filter": "rdp",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "15.5",
+    "en": "VNC authentication type",
+    "pt": "Tipo de autenticação VNC",
+    "kind": "fields",
+    "filter": "vnc.security_type || vnc.client_security_type",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "vnc.security_type",
+      "vnc.client_security_type"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "15.7",
+    "en": "SSH decoded outside port 22",
+    "pt": "SSH decodificado fora da porta 22",
+    "kind": "fields",
+    "filter": "ssh && !(tcp.port == 22)",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "tcp.srcport",
+      "ip.dst",
+      "ipv6.dst",
+      "tcp.dstport"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "15.8",
+    "en": "TLS handshake on RDP port",
+    "pt": "Handshake TLS na porta RDP",
+    "kind": "fields",
+    "filter": "tls.handshake && tcp.port == 3389",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "15.10",
+    "en": "Remote-access endpoint pairs",
+    "pt": "Pares de endpoints de acesso remoto",
+    "kind": "fields",
+    "filter": "ssh || rdp || vnc || telnet",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst",
+      "tcp.dstport",
+      "frame.protocols"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "15.12",
+    "en": "VNC clear no-auth negotiation evidence",
+    "pt": "Evidências de negociação VNC sem autenticação",
+    "kind": "fields",
+    "filter": "vnc.security_type == 1 || vnc.client_security_type == 1",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "16.1",
+    "en": "TCP SYN frequency by source and destination",
+    "pt": "Frequência de TCP SYN por origem e destino",
+    "kind": "fields",
+    "filter": "tcp.flags.syn == 1 && tcp.flags.ack == 0",
+    "fields": [
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst",
+      "tcp.dstport"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "16.2",
+    "en": "TCP SYN timestamps by destination and port",
+    "pt": "Horários de SYN TCP por destino e porta",
+    "kind": "fields",
+    "filter": "ip.dst && tcp.flags.syn == 1 && tcp.flags.ack == 0",
+    "fields": [
+      "ip.dst",
+      "tcp.dstport",
+      "frame.time_epoch"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "16.3",
+    "en": "Captured TCP payload bytes by IPv4 destination",
+    "pt": "Bytes de payload TCP capturados por destino IPv4",
+    "kind": "fields",
+    "filter": "ip.dst && tcp.len > 0",
+    "fields": [
+      "ip.dst",
+      "tcp.len"
+    ],
+    "mode": "raw",
+    "transform": "sum_by_key"
+  },
+  {
+    "id": "16.6",
+    "en": "Malformed frames",
+    "pt": "Quadros malformados",
+    "kind": "fields",
+    "filter": "_ws.malformed",
+    "fields": [
+      "frame.number",
+      "frame.protocols",
+      "_ws.expert.message"
+    ],
+    "mode": "raw",
+    "log_query": "errors"
+  },
+  {
+    "id": "16.7",
+    "en": "TCP retransmission events",
+    "pt": "Eventos de retransmissão TCP",
+    "kind": "fields",
+    "filter": "tcp.analysis.retransmission || tcp.analysis.fast_retransmission",
+    "fields": [
+      "frame.number",
+      "tcp.stream",
+      "frame.time_relative"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "16.8",
+    "en": "Wireshark Expert Info",
+    "pt": "Expert Info do Wireshark",
+    "kind": "statistics",
+    "taps": [
+      "expert"
+    ]
+  },
+  {
+    "id": "16.9",
+    "en": "ICMP echo requests with large payload",
+    "pt": "Requisições ICMP echo com payload grande",
+    "kind": "fields",
+    "filter": "icmp.type == 8 && data.len > 64",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ip.dst",
+      "data.len"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "16.10",
+    "en": "Intervals between TCP SYNs by IPv4 destination",
+    "pt": "Intervalos entre SYNs TCP por destino IPv4",
+    "kind": "fields",
+    "filter": "ip.dst && tcp.flags.syn == 1 && tcp.flags.ack == 0",
+    "fields": [
+      "ip.dst",
+      "frame.time_epoch"
+    ],
+    "mode": "raw",
+    "transform": "time_between"
+  },
+  {
+    "id": "16.11",
+    "en": "TCP frame delta observations",
+    "pt": "Observações de deltas de quadros TCP",
+    "kind": "fields",
+    "filter": "tcp",
+    "fields": [
+      "frame.number",
+      "tcp.stream",
+      "frame.time_delta_displayed"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "16.12",
+    "en": "Out-of-order TCP segments",
+    "pt": "Segmentos TCP fora de ordem",
+    "kind": "fields",
+    "filter": "tcp.analysis.out_of_order",
+    "fields": [
+      "frame.number",
+      "tcp.stream",
+      "frame.time_relative"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "16.13",
+    "en": "Observed frame sizes",
+    "pt": "Tamanhos de quadros observados",
+    "kind": "fields",
+    "filter": "",
+    "fields": [
+      "frame.len"
+    ],
+    "mode": "count"
+  },
+  {
+    "id": "16.14",
+    "en": "HTTP or DNS decoded on unusual ports",
+    "pt": "HTTP ou DNS dissecado em portas incomuns",
+    "kind": "fields",
+    "filter": "(http && tcp && !(tcp.port in {80,443,8080,8443})) || (dns && udp && !(udp.port == 53))",
+    "fields": [
+      "frame.number",
+      "frame.protocols",
+      "tcp.dstport",
+      "udp.dstport"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "16.18",
+    "en": "Long DNS labels for review",
+    "pt": "Rótulos DNS longos para revisão",
+    "kind": "fields",
+    "filter": "dns.qry.name matches \"^[a-zA-Z0-9]{20,}\\\\.\"",
+    "fields": [
+      "frame.number",
+      "dns.qry.name"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "17.1",
+    "en": "Packet event timeline",
+    "pt": "Linha do tempo de pacotes",
+    "kind": "fields",
+    "filter": "",
+    "fields": [
+      "frame.number",
+      "frame.time_epoch",
+      "ip.src",
+      "ipv6.src",
+      "ip.dst",
+      "ipv6.dst",
+      "frame.protocols"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "17.2",
+    "en": "Follow a TCP session (ASCII)",
+    "pt": "Seguir uma sessão TCP (ASCII)",
+    "kind": "follow",
+    "protocol": "tcp"
+  },
+  {
+    "id": "17.5",
+    "en": "Capture file hashes for chain of custody",
+    "pt": "Hashes do arquivo de captura para cadeia de custódia",
+    "kind": "capture_info",
+    "flags": [
+      "-H"
+    ]
+  },
+  {
+    "id": "17.6",
+    "en": "TCP sequence, ACK and payload evidence",
+    "pt": "Evidências de sequência, ACK e payload TCP",
+    "kind": "fields",
+    "filter": "tcp",
+    "fields": [
+      "frame.number",
+      "tcp.stream",
+      "tcp.seq",
+      "tcp.ack",
+      "tcp.len",
+      "tcp.payload"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "17.7",
+    "en": "Frames with negative timestamp deltas",
+    "pt": "Quadros com deltas de timestamp negativos",
+    "kind": "fields",
+    "filter": "frame.time_delta < 0",
+    "fields": [
+      "frame.number",
+      "frame.time_epoch",
+      "frame.time_delta"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "17.9",
+    "en": "Observed TCP acknowledgment RTT",
+    "pt": "RTT observado de confirmações TCP",
+    "kind": "fields",
+    "filter": "tcp.analysis.ack_rtt",
+    "fields": [
+      "frame.number",
+      "tcp.stream",
+      "tcp.analysis.ack_rtt"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "17.10",
+    "en": "Observed TCP timestamp options",
+    "pt": "Opções de timestamp TCP observadas",
+    "kind": "fields",
+    "filter": "tcp.options.timestamp.tsval",
+    "fields": [
+      "frame.time_epoch",
+      "tcp.stream",
+      "tcp.options.timestamp.tsval",
+      "tcp.options.timestamp.tsecr"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "17.11",
+    "en": "Export captured e-mail messages",
+    "pt": "Exportar mensagens de e-mail capturadas",
+    "kind": "objects",
+    "protocol": "imf"
+  },
+  {
+    "id": "17.12",
+    "en": "Observed HTTP browsing events",
+    "pt": "Eventos observados de navegação HTTP",
+    "kind": "fields",
+    "filter": "http.request",
+    "fields": [
+      "frame.time_epoch",
+      "http.host",
+      "http.request.uri",
+      "http.response_in"
+    ],
+    "mode": "raw",
+    "log_query": "timeline"
+  },
+  {
+    "id": "18.2",
+    "en": "Extract PDF text",
+    "pt": "Extrair texto do PDF",
+    "kind": "document",
+    "tool": "text"
+  },
+  {
+    "id": "18.5",
+    "en": "Inspect PDF metadata",
+    "pt": "Consultar metadados do PDF",
+    "kind": "document",
+    "tool": "info"
+  },
+  {
+    "id": "18.6",
+    "en": "List PDF images",
+    "pt": "Listar imagens do PDF",
+    "kind": "document",
+    "tool": "images"
+  },
+  {
+    "id": "19.4",
+    "en": "Packet hexdump",
+    "pt": "Pacotes em hexadecimal",
+    "kind": "packets",
+    "format": "hex"
+  },
+  {
+    "id": "19.5",
+    "en": "Packet dissection in JSON",
+    "pt": "Dissecação de pacotes em JSON",
+    "kind": "packets",
+    "format": "json"
+  },
+  {
+    "id": "19.6",
+    "en": "Frame metadata in CSV",
+    "pt": "Metadados de quadros em CSV",
+    "kind": "packets",
+    "format": "csv"
+  },
+  {
+    "id": "19.7",
+    "en": "Packet dissection in XML (PDML)",
+    "pt": "Dissecação de pacotes em XML (PDML)",
+    "kind": "packets",
+    "format": "pdml"
+  },
+  {
+    "id": "19.8",
+    "en": "Save packets matching a display filter",
+    "pt": "Salvar pacotes que correspondem ao filtro de exibição",
+    "kind": "write_capture"
+  },
+  {
+    "id": "19.14",
+    "en": "Write a PCAPNG copy",
+    "pt": "Gravar uma cópia em PCAPNG",
+    "kind": "write_capture"
+  },
+  {
+    "id": "19.19",
+    "en": "Generate a derived PCAPNG from a log (auto-detect)",
+    "pt": "Gerar PCAPNG derivado de um log (automático)",
+    "kind": "log_capture"
+  },
+  {
+    "id": "19.20",
+    "en": "Generate a derived PCAPNG preserving log bytes",
+    "pt": "Gerar PCAPNG derivado preservando os bytes do log",
+    "kind": "log_capture",
+    "raw": true
+  },
+  {
+    "id": "19.21",
+    "en": "Read raw text data from a derived capture",
+    "pt": "Ler dados de texto de uma captura derivada",
+    "kind": "fields",
+    "filter": "data.data",
+    "fields": [
+      "data.data"
+    ]
+  },
+  {
+    "id": "19.22",
+    "en": "Inspect JSON keys and paths in a derived capture",
+    "pt": "Inspecionar chaves e caminhos JSON de uma captura derivada",
+    "kind": "fields",
+    "filter": "json",
+    "fields": [
+      "frame.number",
+      "json.key",
+      "json.path"
+    ]
+  },
+  {
+    "id": "21.2",
+    "en": "Generate packet dissection as JSON",
+    "pt": "Gerar dissecação de pacotes como JSON",
+    "kind": "packets",
+    "format": "json"
+  },
+  {
+    "id": "21.4",
+    "en": "Traffic timeline",
+    "pt": "Timeline de tráfego",
+    "kind": "fields",
+    "filter": "",
+    "fields": [
+      "frame.time_epoch",
+      "frame.number",
+      "frame.protocols",
+      "frame.len"
+    ],
+    "mode": "raw",
+    "log_query": "timeline"
+  },
+  {
+    "id": "21.5",
+    "en": "Observed DNS names for triage",
+    "pt": "Nomes DNS observados para triagem",
+    "kind": "fields",
+    "filter": "dns.flags.response == 0 && dns.qry.name",
+    "fields": [
+      "dns.qry.name"
+    ],
+    "mode": "unique"
+  },
+  {
+    "id": "21.6",
+    "en": "Capture summary statistics",
+    "pt": "Estatísticas de resumo da captura",
+    "kind": "statistics",
+    "taps": [
+      "io,phs",
+      "conv,tcp"
+    ],
+    "log_query": "summary"
+  },
+  {
+    "id": "21.8",
+    "en": "Capture file hashes",
+    "pt": "Hashes do arquivo de captura",
+    "kind": "capture_info",
+    "flags": [
+      "-H"
+    ]
+  },
+  {
+    "id": "24.1",
+    "en": "BGP message types",
+    "pt": "Tipos de mensagens BGP",
+    "kind": "fields",
+    "filter": "bgp",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "bgp.type"
+    ]
+  },
+  {
+    "id": "25.1",
+    "en": "SNMP packet inventory",
+    "pt": "Inventário de pacotes SNMP",
+    "kind": "fields",
+    "filter": "snmp",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "snmp.version"
+    ]
+  },
+  {
+    "id": "26.1",
+    "en": "Modbus/TCP function codes",
+    "pt": "Códigos de função Modbus/TCP",
+    "kind": "fields",
+    "filter": "modbus",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ip.dst",
+      "modbus.func_code"
+    ]
+  },
+  {
+    "id": "27.1",
+    "en": "Bluetooth Low Energy frames",
+    "pt": "Quadros Bluetooth Low Energy",
+    "kind": "fields",
+    "filter": "btle",
+    "fields": [
+      "frame.number",
+      "frame.protocols",
+      "btle.access_address"
+    ]
+  },
+  {
+    "id": "34.1",
+    "en": "Kerberos message types",
+    "pt": "Tipos de mensagem Kerberos",
+    "kind": "fields",
+    "filter": "kerberos.msg_type",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "kerberos.msg_type"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "34.2",
+    "en": "Observable HTTP OAuth endpoint indicators",
+    "pt": "Indícios observáveis de endpoints OAuth em HTTP",
+    "kind": "fields",
+    "filter": "http.request.uri contains \"oauth\"",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "http.host"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "34.3",
+    "en": "SAML marker presence in visible HTTP",
+    "pt": "Presença de marcador SAML em HTTP visível",
+    "kind": "fields",
+    "filter": "http contains \"SAMLResponse\" || http contains \"SAMLRequest\"",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "http.host"
+    ],
+    "mode": "raw"
+  },
+  {
+    "id": "34.5",
+    "en": "Kerberos TGS requests for review",
+    "pt": "Requisições Kerberos TGS para revisão",
+    "kind": "fields",
+    "filter": "kerberos.msg_type == 12",
+    "fields": [
+      "frame.number",
+      "ip.src",
+      "ipv6.src",
+      "kerberos.realm",
+      "kerberos.sname_string"
+    ],
+    "mode": "raw"
+  }
+]
